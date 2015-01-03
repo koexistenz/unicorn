@@ -19,6 +19,9 @@ def main(screen, player, screen_width, screen_height, player_rect):
 	move_donuts = pygame.USEREVENT+2
 	pygame.time.set_timer(move_donuts, 10)
 
+	draw_event = pygame.USEREVENT+3
+	pygame.time.set_timer(draw_event, 15)
+
 	while True:
 
 		for event in pygame.event.get():
@@ -62,18 +65,20 @@ def main(screen, player, screen_width, screen_height, player_rect):
 					if player_rect[0] > screen_width - player.get_size()[0]: # oh no you don't
 						player_rect = [screen_width - player.get_size()[0], player_rect[1]]
 
-		screen.fill(000000)
+			elif event.type == draw_event:
 
-		show_score = font.render(str(score), 1, (0xff, 0xff, 0xff)) # rendering the score
-		show_level = font.render(str(level), 1, (0xff, 0xff, 0xff)) # rendering the level
+				screen.fill(000000)
 
-		for i in new_donuts:
-			screen.blit(donut, (i[0], i[1]))
+				show_score = font.render(str(score), 1, (0xff, 0xff, 0xff)) # rendering the score
+				show_level = font.render(str(level), 1, (0xff, 0xff, 0xff)) # rendering the level
 
-		levelpos = (10, 10)
-		scorepos = (screen_width - 10 - show_score.get_size()[0], 10)
-		screen.blit(show_score, scorepos) # showing the score
-		screen.blit(show_level, levelpos) # showing the level
-		screen.blit(player, player_rect) # spawn player at player_rect
+				for i in new_donuts:
+					screen.blit(donut, (i[0], i[1]))
 
-		pygame.display.update() # update the screen
+				levelpos = (10, 10)
+				scorepos = (screen_width - 10 - show_score.get_size()[0], 10)
+				screen.blit(show_score, scorepos) # showing the score
+				screen.blit(show_level, levelpos) # showing the level
+				screen.blit(player, player_rect) # spawn player at player_rect
+
+				pygame.display.update() # update the screen

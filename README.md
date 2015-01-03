@@ -2,7 +2,7 @@ unicorn
 =======
 unicorn is a little game by koex, developed in python using pygame.
 
-unicorn version 0.3
+unicorn version 0.3.1
 -------
 There is a unicorn and it's raining donuts. Eat the donuts to get a higher score.
 
@@ -11,6 +11,7 @@ changelog
 - donuts won't stop appearing
 - you can eat the donuts
 - you get points for eating donuts
+- limited frame rate
 
 older versions
 =======
