@@ -14,6 +14,8 @@ def main(screen, player, screen_width, screen_height, player_rect):
 	donut_event = pygame.USEREVENT+1
 	pygame.time.set_timer(donut_event, 2000)
 
+	new_donuts = []
+
 	move_donuts = pygame.USEREVENT+2
 	pygame.time.set_timer(move_donuts, 10)
 
@@ -27,18 +29,24 @@ def main(screen, player, screen_width, screen_height, player_rect):
 
 			elif event.type == donut_event: # let the donuts appear
 
-				if len(donuts) < 4:
+				if len(new_donuts) < 4:
 					donut_x = random.randint(1,screen_width-donut.get_size()[1])
 					screen.blit(donut, (donut_x,0))
 					donut_position = (donut_x,0)
 					donuts.append([donut_x,0])
-					print donuts
 
 			elif event.type == move_donuts:
 
 				if len(donuts) > 0:
+					new_donuts = []
 					for i in donuts:
 						i[1] = i[1] + 1
+						if i[0] >= player_rect[0] and i[0] <= player_rect[0] + player.get_size()[0] and i[1] >= screen_height - player.get_size()[1] - donut.get_size()[1]/2: # teste ob kollidiert
+							score = score + 10 # wenn ja score hoch
+							i[1] = screen_height # kollidiert = 1
+						elif i[1] < screen_height - donut.get_size()[1]:
+								new_donuts.append([i[0], i[1]])
+				donuts = new_donuts
 
 			elif event.type == KEYDOWN: # handling keydown events
 
@@ -59,7 +67,7 @@ def main(screen, player, screen_width, screen_height, player_rect):
 		show_score = font.render(str(score), 1, (0xff, 0xff, 0xff)) # rendering the score
 		show_level = font.render(str(level), 1, (0xff, 0xff, 0xff)) # rendering the level
 
-		for i in donuts:
+		for i in new_donuts:
 			screen.blit(donut, (i[0], i[1]))
 
 		levelpos = (10, 10)
