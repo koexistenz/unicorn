@@ -28,7 +28,7 @@ player_width = player_size[0]
 player_rect = [(screen_width - player_width) / 2, screen_height - player_height]
 
 # setting the window title
-pygame.display.set_caption('unicorn rescue')
+pygame.display.set_caption('unicorn')
 
 # setting some stuff for moving the unicorn
 pressed = pygame.key.get_pressed()
