@@ -6,7 +6,7 @@ import pygame, sys
 from pygame.locals import *
 
 # import main game code
-import main
+from data import main
 
 #always needed when using pygame
 pygame.init()
@@ -25,14 +25,14 @@ player = pygame.image.load('player.png')
 player_size = player.get_size()
 player_height = player_size[1]
 player_width = player_size[0]
-player_rect = ((screen_width - player_width) / 2, screen_height - player_height)
+player_rect = [(screen_width - player_width) / 2, screen_height - player_height]
 
 # setting the window title
 pygame.display.set_caption('unicorn rescue')
 
 # setting some stuff for moving the unicorn
 pressed = pygame.key.get_pressed()
-pygame.key.set_repeat(1,5)
+pygame.key.set_repeat(1,2)
 
 # MAIN GAME LOOP
 main.main(screen, player, screen_width, screen_height, player_rect)
