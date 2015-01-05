@@ -38,18 +38,27 @@ def main(screen, player, screen_width, screen_height, player_rect):
 	new_enemys = []
 
 	move_enemys = pygame.USEREVENT+5
-	pygame.time.set_timer(move_enemys, 1)
+	pygame.time.set_timer(move_enemys, 10)
 
 	game = 1
 
-	def gameover():
+	def gameover(score):
 		while True:
 			screen = pygame.display.set_mode((500,700))
 			screen.fill(000000)
 			gameover_pos = [screen_width / 3, screen_height / 2]
 			gameover = font.render("GAME OVER", 1, (0xff, 0xff, 0xff))
-			screen.blit(gameover, gameover_pos) 
+			final = 'Your final score is %d' % score
+			final_score_pos = [screen_width / 4, 100]
+			final_score = font.render(str(final), 1, (0xff, 0xff, 0xff))
+			screen.blit(final_score, final_score_pos)
+			screen.blit(gameover, gameover_pos)
 			pygame.display.update()
+
+			for event in pygame.event.get():
+				if event.type == QUIT:
+					pygame.quit()
+					sys.exit()
 
 	while game == 1:
 
@@ -139,7 +148,7 @@ def main(screen, player, screen_width, screen_height, player_rect):
 					screen.blit(life, life_one)
 				else:
 					game = 0
-					gameover()
+					gameover(score)
 
 				levelpos = (10, 10)
 				scorepos = (screen_width - 10 - show_score.get_size()[0], 10)

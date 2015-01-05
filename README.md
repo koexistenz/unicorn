@@ -2,7 +2,7 @@ unicorn
 =======
 unicorn is a little game by koex, developed in python using pygame.
 
-unicorn version 0.4 (alpha)
+unicorn version 0.4.1 (alpha)
 -------
 There is a unicorn, it can move to the right and to the left (left key, right key). Donuts and enemys are falling down. Eat the donuts, but don't collide with enemys! You have three lifes, each time you collide with an enemy, you lose one.
 
@@ -11,6 +11,10 @@ changelog
 - you can die
 - you do have enemys
 - with dying you finally have a way to quit this game
+
+bugfix
+-------
+- now showing score on gameover screen
 
 older versions
 =======
