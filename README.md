@@ -2,19 +2,22 @@ unicorn
 =======
 unicorn is a little game by koex, developed in python using pygame.
 
-unicorn version 0.3.1
+unicorn version 0.4 (alpha)
 -------
-There is a unicorn and it's raining donuts. Eat the donuts to get a higher score.
+There is a unicorn, it can move to the right and to the left (left key, right key). Donuts and enemys are falling down. Eat the donuts, but don't collide with enemys! You have three lifes, each time you collide with an enemy, you lose one.
 
 changelog
 -------
-- donuts won't stop appearing
-- you can eat the donuts
-- you get points for eating donuts
-- limited frame rate
+- you can die
+- you do have enemys
+- with dying you finally have a way to quit this game
 
 older versions
 =======
+
+unicorn version 0.3.1
+-------
+There is a unicorn and it's raining donuts. Eat the donuts to get a higher score.
 
 unicorn version 0.2
 -------

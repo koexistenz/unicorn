@@ -11,6 +11,16 @@ def main(screen, player, screen_width, screen_height, player_rect):
 	donut = pygame.image.load('donut.png')
 	donuts = []
 
+	enemy = pygame.image.load('enemy.png')
+	enemys = []
+
+	life = pygame.image.load('life.png')
+	lifes = 3
+
+	life_one = (5, 50)
+	life_two = (35, 50)
+	life_three = (65, 50)
+
 	donut_event = pygame.USEREVENT+1
 	pygame.time.set_timer(donut_event, 2000)
 
@@ -22,7 +32,26 @@ def main(screen, player, screen_width, screen_height, player_rect):
 	draw_event = pygame.USEREVENT+3
 	pygame.time.set_timer(draw_event, 15)
 
-	while True:
+	enemy_event = pygame.USEREVENT+4
+	pygame.time.set_timer(enemy_event, 2500)
+
+	new_enemys = []
+
+	move_enemys = pygame.USEREVENT+5
+	pygame.time.set_timer(move_enemys, 1)
+
+	game = 1
+
+	def gameover():
+		while True:
+			screen = pygame.display.set_mode((500,700))
+			screen.fill(000000)
+			gameover_pos = [screen_width / 3, screen_height / 2]
+			gameover = font.render("GAME OVER", 1, (0xff, 0xff, 0xff))
+			screen.blit(gameover, gameover_pos) 
+			pygame.display.update()
+
+	while game == 1:
 
 		for event in pygame.event.get():
 
@@ -38,6 +67,14 @@ def main(screen, player, screen_width, screen_height, player_rect):
 					donut_position = (donut_x,0)
 					donuts.append([donut_x,0])
 
+			elif event.type == enemy_event:
+
+				if len(new_enemys) < 4:
+					enemy_x = random.randint(1,screen_width-enemy.get_size()[1])
+					screen.blit(enemy, (enemy_x, 0))
+					enemy_position = (enemy_x, 0)
+					enemys.append([enemy_x, 0])
+
 			elif event.type == move_donuts:
 
 				if len(donuts) > 0:
@@ -50,6 +87,19 @@ def main(screen, player, screen_width, screen_height, player_rect):
 						elif i[1] < screen_height - donut.get_size()[1]:
 								new_donuts.append([i[0], i[1]])
 				donuts = new_donuts
+
+			elif event.type == move_enemys:
+
+				if len(enemys) > 0:
+					new_enemys = []
+					for i in enemys:
+						i[1] = i[1] + 2
+						if i[0] >= player_rect[0] and i[0] <= player_rect[0] + player.get_size()[0] and i[1] >= screen_height - player.get_size()[1] - enemy.get_size()[1]:
+							lifes = lifes - 1
+							i[1] = screen_height
+						elif i[1] < screen_height - enemy.get_size()[1]:
+							new_enemys.append([i[0], i[1]])
+				enemys = new_enemys
 
 			elif event.type == KEYDOWN: # handling keydown events
 
@@ -74,6 +124,22 @@ def main(screen, player, screen_width, screen_height, player_rect):
 
 				for i in new_donuts:
 					screen.blit(donut, (i[0], i[1]))
+
+				for i in new_enemys:
+					screen.blit(enemy, (i[0], i[1]))
+
+				if lifes == 3:
+					screen.blit(life, life_one)
+					screen.blit(life, life_two)
+					screen.blit(life, life_three)
+				elif lifes == 2:
+					screen.blit(life, life_one)
+					screen.blit(life, life_two)
+				elif lifes == 1:
+					screen.blit(life, life_one)
+				else:
+					game = 0
+					gameover()
 
 				levelpos = (10, 10)
 				scorepos = (screen_width - 10 - show_score.get_size()[0], 10)
