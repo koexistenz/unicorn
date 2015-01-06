@@ -116,21 +116,23 @@ def main(screen, player, screen_width, screen_height, player_rect):
 								level = 2
 								pygame.time.set_timer(life_event, 2500)
 								pygame.time.set_timer(donut_event, 1500)
-								pygame.time.set_timer(enemy_event, 2500)
+								pygame.time.set_timer(enemy_event, 4000)
 							elif score == 200:
 								level = 3
-								enemy_speed = 2
-								pygame.time.set_timer(enemy_event, 2000)
+								donut_speed = 2
+								pygame.time.set_timer(enemy_event, 3000)
 								pygame.time.set_timer(life_event, 5000)
+								pygame.time.set_timer(donut_event, 2000)
 							elif score == 500:
 								level = 4
-								enemy_speed = 3
-								donut_speed = 2
-								pygame.time.set_timer(enemy_event, 1500)
+								enemy_speed = 2
+								donut_speed = 3
+								pygame.time.set_timer(enemy_event, 2000)
 								pygame.time.set_timer(life_event, 7000)
 							elif score == 1000:
 								level = 5
-								pygame.time.set_timer(donut_event, 2000)
+								enemy_speed = 3
+								pygame.time.set_timer(donut_event, 3000)
 							elif score == 2000:
 								level = 6
 								pygame.time.set_timer(enemy_event, 1000)
